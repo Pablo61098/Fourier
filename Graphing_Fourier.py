@@ -1,5 +1,4 @@
 from sympy import *
-import sympy as sp
 from sympy.abc import x,n,T
 import numpy as np
 import matplotlib.pyplot as mpl
@@ -78,17 +77,17 @@ def menu_2():
 
 
 def integrar_an(func,limits,periodo):
-    func_integrated=lambdify(x,integrate(func*cos(2*np.pi*n*x/float(periodo)),x),"sympy")
+    func_integrated=lambdify(x,integrate(func*cos(2*np.pi*n*x/float(periodo)),x),["sympy","numpy"])
     func_integrated=func_integrated(limits[1])-func_integrated(limits[0])
     return func_integrated
 
 def integrar_bn(func,limits,periodo):
-    func_integrated=lambdify(x,integrate(func*sin(2*np.pi*n*x/float(periodo)),x),"sympy")
+    func_integrated=lambdify(x,integrate(func*sin(2*np.pi*n*x/float(periodo)),x),["sympy","numpy"])
     func_integrated=func_integrated(limits[1])-func_integrated(limits[0])
     return func_integrated
 
 def integrar_a0(func,limits):
-    func_integrated=lambdify(x,integrate(func,x),"sympy")
+    func_integrated=lambdify(x,integrate(func,x),["sympy","numpy"])
     func_integrated=func_integrated(limits[1])-func_integrated(limits[0])
     return func_integrated
 
@@ -105,15 +104,11 @@ def conseguir_coeficientes(dict,periodo):
     a_zero = a_zero*(1/(periodo))
     an = an*(2/periodo)
     bn = bn * (2 / periodo)
-    print("-------------------")
-    print(simplify(a_zero) )
-    print(simplify(an))
-    print(simplify(bn))
-    print("-------------------")
+
     return [sympify(a_zero),sympify(an),sympify(bn)]
 
 def menu_3():
-    print("\n1) Continuar con otro indice de iteracion \n 2) Salir\n")
+    print("\n 1) Continuar con otro indice de iteracion \n 2) Salir\n")
 
 
 if __name__ == "__main__":
@@ -164,10 +159,5 @@ if __name__ == "__main__":
 
         menu()
         opcion = input("Escoja una opcion: ")
-
-
-
-
-
 
 
